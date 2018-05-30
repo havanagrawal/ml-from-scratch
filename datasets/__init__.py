@@ -15,3 +15,11 @@ def load_spam(standardized=True, with_intercept=True):
         X_train, X_test = standardize(X_train, X_test)
 
     return X_train, X_test, y_train, y_test
+
+def load_imagenet(standardized=True, with_intercept=True):
+    from .imagenet_small import load_dataset
+    X_train, X_test, y_train, y_test = load_dataset()
+    if standardized:
+        X_train, X_test = standardize(X_train, X_test)
+
+    return X_train, X_test, y_train, y_test

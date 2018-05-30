@@ -1,1 +1,2 @@
 include datasets/spam/spam*
+include datasets/imagenet_small/*npy
