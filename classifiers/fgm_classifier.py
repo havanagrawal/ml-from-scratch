@@ -6,6 +6,7 @@ The name and style is inspired from the SGDClassifier in sklearn
 import numpy as np
 
 from sklearn.base import BaseEstimator
+from sklearn.metrics import accuracy_score
 from ._classifiers import LogisticClassifier
 from .fast_gradient_method import fastgradientdescent
 
@@ -20,7 +21,7 @@ class FGMClassifier(BaseEstimator):
 
     Parameters
     ----------
-    classifier: str
+    algo: str
         One of 'logistic' or 'svm'
 
     lmbda: float, default=0
@@ -42,7 +43,8 @@ class FGMClassifier(BaseEstimator):
         The maximum number of iterations for which fast gradient method should be run
     """
     def __init__(self, classifier='logistic', lmbda=0, epsilon=0.0001, learning_rate='adaptive', eta=1, max_iter=100):
-        self.classifier = _CLASSIFIERS[classifier]
+        self.classifier_method = classifier
+        self._classifier = _CLASSIFIERS[classifier]
         self.lmbda = lmbda
         self.epsilon = epsilon
         self.learning_rate = learning_rate
@@ -51,6 +53,16 @@ class FGMClassifier(BaseEstimator):
 
         self._betas = None
         self._coef = None
+
+    @property
+    def classifier(self):
+        return self.classifier_method
+
+    @classifier.setter
+    def classifier(self, classifier):
+        self.classifier = classifier
+        self._classifier = _CLASSIFIERS[classifier]
+
 
     def fit(self, X, y, verbose=False):
         """Fit the model using fast gradient method
@@ -68,7 +80,7 @@ class FGMClassifier(BaseEstimator):
         _, d = X.shape
         beta_init = np.zeros(d)
         self._betas = fastgradientdescent(X, y, beta_init, self.epsilon,
-                                          self.classifier.computegrad, self.classifier.computeobj,
+                                          self._classifier.computegrad, self._classifier.computeobj,
                                           eta=self.eta, max_iter=self.max_iter, lmbda=self.lmbda,
                                           use_backtracking=use_backtracking)
 
@@ -76,7 +88,10 @@ class FGMClassifier(BaseEstimator):
         return self
 
     def predict(self, X):
-        return self.classifier.predict(X, self._coef)
+        return self._classifier.predict(X, self._coef)
 
     def predict_proba(self, X):
-        return self.classifier.predict_proba(X, self._coef)
+        return self._classifier.predict_proba(X, self._coef)
+
+    def score(self, X, y):
+        return accuracy_score(y, self.predict(X))
