@@ -1,5 +1,6 @@
 # ML From Scratch
 
+[![Build Status](https://travis-ci.org/havanagrawal/ml-from-scratch.svg?branch=master)](https://travis-ci.org/havanagrawal/ml-from-scratch)
 
 ## Introduction
 
@@ -13,7 +14,5 @@ In all of the algorithms in this repository, unless explicitly stated otherwise,
 
 ## TODO
 
-1. Add tests and Travis CI  
-2. Add code coverage  
-3. Add examples  
-4. Make stuff "pip install"able  
+1. Add code coverage  
+2. Make stuff "pip install"able  
