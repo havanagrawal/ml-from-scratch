@@ -5,8 +5,7 @@ The name and style is inspired from the SGDClassifier in sklearn
 
 import numpy as np
 
-from sklearn.base import BaseEstimator
-from sklearn.metrics import accuracy_score
+from sklearn.base import BaseEstimator, ClassifierMixin
 from ._classifiers import LogisticClassifier, LinearSVMClassifier
 from .fast_gradient_method import fastgradientdescent
 
@@ -15,7 +14,7 @@ _CLASSIFIERS = {
     'svm': LinearSVMClassifier(),
 }
 
-class FGMClassifier(BaseEstimator):
+class FGMClassifier(BaseEstimator, ClassifierMixin):
     """Linear classifiers (SVM, logistic regression, a.o.) with fast gradient method
 
     By default, the model uses L2-Regularized.
@@ -93,6 +92,3 @@ class FGMClassifier(BaseEstimator):
 
     def predict_proba(self, X):
         return self._classifier.predict_proba(X, self._coef)
-
-    def score(self, X, y):
-        return accuracy_score(y, self.predict(X))

@@ -60,7 +60,6 @@ class BaseClassifier(object):
 
 
 class LogisticClassifier(BaseClassifier):
-    """TODO: Cache yhat"""
     def __init__(self):
         pass
 
