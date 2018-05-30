@@ -12,7 +12,7 @@ def load_dataset():
     df = pd.read_csv(data_path, delim_whitespace=True, names=headers)
     test_train_split_ind = np.loadtxt(test_train_split_path)
 
-    X = df.drop('spam', axis=1)
+    X = df.drop('spam', axis=1).values
     y = df.spam.values
 
     y[y == 0] = -1

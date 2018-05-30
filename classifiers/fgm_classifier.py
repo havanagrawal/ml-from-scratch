@@ -1,4 +1,7 @@
-"""Classification using the Fast Gradient Method."""
+"""Classification using the Fast Gradient Method.
+
+The name and style is inspired from the SGDClassifier in sklearn
+"""
 
 import numpy as np
 
@@ -35,7 +38,7 @@ class FGMClassifier(BaseEstimator):
     eta: float
         The learning rate that is used for the gradient descent.
 
-    max_iter: int, default=1000
+    max_iter: int, default=100
         The maximum number of iterations for which fast gradient method should be run
     """
     def __init__(self, classifier='logistic', lmbda=0, epsilon=0.0001, learning_rate='adaptive', eta=1, max_iter=100):
@@ -49,7 +52,7 @@ class FGMClassifier(BaseEstimator):
         self._betas = None
         self._coef = None
 
-    def fit(self, X, y):
+    def fit(self, X, y, verbose=False):
         """Fit the model using fast gradient method
 
             Parameters
@@ -70,6 +73,10 @@ class FGMClassifier(BaseEstimator):
                                           use_backtracking=use_backtracking)
 
         self._coef = self._betas[-1]
+        return self
 
     def predict(self, X):
         return self.classifier.predict(X, self._coef)
+
+    def predict_proba(self, X):
+        return self.classifier.predict_proba(X, self._coef)

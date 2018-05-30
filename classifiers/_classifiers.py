@@ -94,7 +94,7 @@ class LogisticClassifier(BaseClassifier):
         return log_cost + regularization_cost
 
     def _logit(self, yhat):
-        return (1) / (1 + np.exp(-yhat))
+        return 1 / (1 + np.exp(-yhat))
 
     def predict(self, X, beta):
         # The logit function returns a probability (0 - 1)
@@ -102,3 +102,11 @@ class LogisticClassifier(BaseClassifier):
 
         # We location-transform this to be in -0.5 to 0.5, and then use the sign
         return np.sign(prob - 0.5)
+
+    def predict_proba(self, X, beta):
+        # The logit function returns a probability (0 - 1)
+        return self._logit(X @ beta)
+
+
+class LinearSVMClassifier(BaseClassifier):
+    pass

@@ -70,16 +70,15 @@ def backtracking(X, y, beta, lmbda, eta_init, computegrad, computeobj, alpha=0.5
 
     armijo_goldstein_condition_satisfied = False
 
-    while True:
+    while i < max_iter and not armijo_goldstein_condition_satisfied:
         new_beta = beta - eta * grad_beta
         new_beta_obj = computeobj(X, y, new_beta, lmbda)
-        armijo_goldstein_condition_satisfied = new_beta_obj - beta_obj >= alpha * eta * norm_grad_beta_sq
-
-        if i >= max_iter or armijo_goldstein_condition_satisfied:
-            return eta
+        armijo_goldstein_condition_satisfied = beta_obj - new_beta_obj >= alpha * eta * norm_grad_beta_sq
 
         eta *= decay
         i += 1
+
+    return eta
 
 
 def fastgradientdescent(X, y, beta_init, epsilon, computegrad, computeobj, eta=1, max_iter=1000, lmbda=0.1,
