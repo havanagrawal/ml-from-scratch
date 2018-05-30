@@ -20,6 +20,39 @@ _CLASSIFIERS = {
 }
 
 class FGMClassifier(BaseEstimator, ClassifierMixin):
+    """Linear classifiers (SVM, logistic regression, a.o.) with fast gradient method
+
+    By default, the model uses L2-Regularized.
+
+    Multi-class support is provided using the One-vs-One approach, i.e. if there are
+    n classes, then n*(n - 1)/2 models will be trained.
+
+    Parameters
+    ----------
+    classifier: str
+        One of 'logistic' or 'svm'
+
+    lmbda: float, default=0
+        Regularization coefficient.
+        By default, the model is unregularized.
+
+    epsilon: float, default=0.0001
+        An estimate of desired accuracy.
+        The descent algorithm will stop if the norm of the gradient is smaller than this value
+
+    learning_rate: str, one of 'constant' or 'adaptive', default='adaptive'
+        If constant, then eta is used as the learning rate
+        If adaptive, then eta is updated after each iteration
+
+    eta: float
+        The learning rate that is used for the gradient descent.
+
+    max_iter: int, default=100
+        The maximum number of iterations for which fast gradient method should be run
+
+    verbose: boolean, default=False
+        Whether or not to print progress messages
+    """
     def __init__(self, classifier='logistic', lmbda=0, epsilon=0.0001, learning_rate='adaptive', eta=1, max_iter=100, verbose=False):
         self.models = defaultdict(dict)
         self.classifier = classifier
@@ -73,11 +106,11 @@ class FGMClassifier(BaseEstimator, ClassifierMixin):
 class FGMBinaryClassifier(BaseEstimator, ClassifierMixin):
     """Binary Linear classifiers (SVM, logistic regression, a.o.) with fast gradient method
 
-    By default, the model uses L2-Regularized.
+    By default, the model uses L2-Regularization.
 
     Parameters
     ----------
-    algo: str
+    classifier: str
         One of 'logistic' or 'svm'
 
     lmbda: float, default=0
