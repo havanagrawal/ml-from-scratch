@@ -13,6 +13,6 @@ A small section of this is also intended as a submission for DATA558/BIOST558 - 
 
 In all of the algorithms in this repository, unless explicitly stated otherwise, the convention for binary classification labels is -1/+1, as opposed to 0/1.
 
-## TODO
+## Examples
 
-1. Make stuff "pip install"able  
+Examples in the form of notebooks can be found in the [examples/notebooks](examples/notebooks) directory.
