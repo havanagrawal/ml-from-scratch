@@ -7,11 +7,12 @@ import numpy as np
 
 from sklearn.base import BaseEstimator
 from sklearn.metrics import accuracy_score
-from ._classifiers import LogisticClassifier
+from ._classifiers import LogisticClassifier, LinearSVMClassifier
 from .fast_gradient_method import fastgradientdescent
 
 _CLASSIFIERS = {
-    'logistic': LogisticClassifier()
+    'logistic': LogisticClassifier(),
+    'svm': LinearSVMClassifier(),
 }
 
 class FGMClassifier(BaseEstimator):

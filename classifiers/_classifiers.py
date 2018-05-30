@@ -109,4 +109,55 @@ class LogisticClassifier(BaseClassifier):
 
 
 class LinearSVMClassifier(BaseClassifier):
-    pass
+    """Linear SVM with Huberized Hinge Loss
+
+    Parameters
+    ----------
+    h: float, default=0.5
+        Smoothing factor
+    """
+    def __init__(self, h=0.5):
+        self.h = h
+
+    def computeobj(self, X, y, beta, lmbda):
+        n, d = X.shape
+        h = self.h
+
+        yhat = X @ beta
+        yt = yhat * y # element wise product
+
+        l_hh = np.zeros(yt.shape)
+
+        mask_1 = yt > 1 + h
+        mask_2 = np.abs(1 - yt) <= h
+        mask_3 = yt < 1 - h
+
+        l_hh[mask_1] = 0
+        l_hh[mask_2] = ((1 + h - yt[mask_2])**2) / 4*h
+        l_hh[mask_3] = 1 - yt[mask_3]
+
+        return lmbda*(np.linalg.norm(beta)**2) + np.mean(l_hh)
+
+    def computegrad(self, X, y, beta, lmbda, h=0.5):
+        n, d = X.shape
+        h = self.h
+
+        yhat = X @ beta
+        yt = yhat * y # element wise product
+
+        mask_1 = yt > 1 + h
+        mask_2 = np.abs(1 - yt) <= h
+        mask_3 = yt < 1 - h
+
+        temp = 2*y[mask_2]*(1 + h - yt[mask_2])/4*h
+
+        grad_l_hh_1 = np.zeros(d)
+        grad_l_hh_2 = -X[mask_2, :].T @ temp
+        grad_l_hh_3 = -X[mask_3, :].T @ y[mask_3]
+
+        gradient = 2*lmbda*beta + (grad_l_hh_1 + grad_l_hh_2 + grad_l_hh_3) / n
+
+        return gradient
+
+    def predict(self, X, beta):
+        return np.sign(X @ beta)
