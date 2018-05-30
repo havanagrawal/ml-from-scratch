@@ -22,9 +22,9 @@ def train_spam_untuned(classifier, X_train, X_test, y_train, y_test):
 
 def train_spam_tuned(classifier, X_train, X_test, y_train, y_test):
     param_grid = {
-        'lmbda': np.linspace(0, 1, 11)
+        'lmbda': np.linspace(0, 1, 6)
     }
-    clf = GridSearchCV(FGMClassifier(classifier=classifier, max_iter=50), param_grid, verbose=1)
+    clf = GridSearchCV(FGMClassifier(classifier=classifier, max_iter=50), param_grid, verbose=2)
 
     return fit_predict(clf, X_train, X_test, y_train, y_test)
 
