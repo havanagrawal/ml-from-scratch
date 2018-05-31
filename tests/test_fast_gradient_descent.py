@@ -47,3 +47,21 @@ class TestFastGradientDescentWithLogistic(unittest.TestCase):
 
         # the returned betas include beta_init
         self.assertEqual(len(betas), self.max_iter + 1)
+
+    def test_regularized_model_has_smaller_beta_norm(self):
+        betas_1 = fastgradientdescent(
+            self.X, self.y, self.beta_init, self.epsilon,
+            self._clf.computegrad, self._clf.computeobj, lmbda=0,
+            max_iter=self.max_iter
+        )
+
+        betas_2 = fastgradientdescent(
+            self.X, self.y, self.beta_init, self.epsilon,
+            self._clf.computegrad, self._clf.computeobj, lmbda=5,
+            max_iter=self.max_iter
+        )
+
+        beta_1 = betas_1[-1]
+        beta_2 = betas_2[-1]
+
+        self.assertLess(np.linalg.norm(beta_2), np.linalg.norm(beta_1))
