@@ -1,6 +1,6 @@
 # ML From Scratch
 
-[![Build Status](https://travis-ci.org/havanagrawal/ml-from-scratch.svg?branch=master)](https://travis-ci.org/havanagrawal/ml-from-scratch) [![codecov](https://codecov.io/gh/havanagrawal/ml-from-scratch/branch/master/graph/badge.svg)](https://codecov.io/gh/havanagrawal/ml-from-scratch) ![Python Version](https://img.shields.io/badge/python-3.6-brightgreen.svg)
+[![Build Status](https://travis-ci.org/havanagrawal/ml-from-scratch.svg?branch=master)](https://travis-ci.org/havanagrawal/ml-from-scratch) [![codecov](https://codecov.io/gh/havanagrawal/ml-from-scratch/branch/master/graph/badge.svg)](https://codecov.io/gh/havanagrawal/ml-from-scratch) ![Python Version](https://img.shields.io/badge/python-3.6-blue.svg)
 
 
 ## Introduction
