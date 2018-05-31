@@ -22,7 +22,7 @@ _CLASSIFIERS = {
 class FGMClassifier(BaseEstimator, ClassifierMixin):
     """Linear classifiers (SVM, logistic regression, a.o.) with fast gradient method
 
-    By default, the model uses L2-Regularized.
+    By default, the model uses L2-Regularization.
 
     Multi-class support is provided using the One-vs-One approach, i.e. if there are
     n classes, then n*(n - 1)/2 models will be trained.
