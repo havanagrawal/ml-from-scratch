@@ -1,5 +1,12 @@
+import os
+import sys
+
 import unittest
 import numpy as np
+
+_curdir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_curdir + "/..")
+
 from classifiers.fast_gradient_method import fastgradientdescent
 from classifiers._classifiers import LogisticClassifier, LinearSVMClassifier
 
