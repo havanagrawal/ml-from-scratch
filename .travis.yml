@@ -8,7 +8,7 @@ install:
 # command to run tests
 script:
   - coverage run examples/spam_trainer.py
-  - coverate run -m unittest discover
+  - coverage run -m unittest discover
 
 after_success:
   - codecov
