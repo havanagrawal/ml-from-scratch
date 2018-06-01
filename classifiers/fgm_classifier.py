@@ -65,6 +65,21 @@ class FGMClassifier(BaseEstimator, ClassifierMixin):
         self.classes = None
 
     def fit(self, X, y):
+        """Fit the model using the fast gradient method with a One-vs-One strategy
+
+        Parameters
+        ----------
+        X: np.ndarray
+            Feature/predictor matrix of shape (n x d)
+
+        y: np.array | np.ndarray
+            Outcome/response array of shape (n,) or (n, 1)
+            The labels MUST be categorical
+
+        Returns
+        -------
+        self: A fitted model
+        """
         self.classes = np.unique(y)
         for clz1, clz2 in combinations(self.classes, 2):
             if self.verbose:
@@ -86,6 +101,18 @@ class FGMClassifier(BaseEstimator, ClassifierMixin):
         return clf
 
     def predict(self, X):
+        """Predict the labels for given feature array
+
+        Parameters
+        ----------
+        X: np.ndarray
+            Feature/predictor matrix of shape (n x d)
+
+        Returns
+        -------
+        y: np.array
+            Outcome/response labels for the input, array of shape (n,) or (n, 1)
+        """
         all_predictions = []
 
         for clz1, clz2 in combinations(self.classes, 2):
@@ -156,14 +183,14 @@ class FGMBinaryClassifier(BaseEstimator, ClassifierMixin):
     def fit(self, X, y, verbose=False):
         """Fit the model using fast gradient method
 
-            Parameters
-            ----------
-            X: np.ndarray
-                Feature/predictor matrix of shape (n x d)
+        Parameters
+        ----------
+        X: np.ndarray
+            Feature/predictor matrix of shape (n x d)
 
-            y: np.array | np.ndarray
-                Outcome/response array of shape (n,) or (n, 1)
-                y must contain only 1/-1
+        y: np.array | np.ndarray
+            Outcome/response array of shape (n,) or (n, 1)
+            y must contain only 1/-1
         """
         use_backtracking = self.learning_rate == 'adaptive'
         _, d = X.shape
@@ -177,6 +204,18 @@ class FGMBinaryClassifier(BaseEstimator, ClassifierMixin):
         return self
 
     def predict(self, X):
+        """Predict the labels for given feature array
+
+        Parameters
+        ----------
+        X: np.ndarray
+            Feature/predictor matrix of shape (n x d)
+
+        Returns
+        -------
+        y: np.array
+            Outcome/response labels for the input, array of shape (n,) or (n, 1)
+        """
         return self._classifier.predict(X, self._coef)
 
     def predict_proba(self, X):
