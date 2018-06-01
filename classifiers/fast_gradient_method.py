@@ -1,6 +1,6 @@
 """Implementations of the fast gradient method, and the backtracking method
 
-The fast gradient method uses a concept of "momentum" to speed up the descentself.
+The fast gradient method uses a concept of "momentum" to speed up the descent.
 
 The backtracking algorithm is a supplementary algorithm that leverages the
 convexity of the objective function to its advantage to determine the most optimal learning rate
