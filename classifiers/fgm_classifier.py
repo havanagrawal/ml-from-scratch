@@ -4,15 +4,15 @@ The name and style is inspired from the SGDClassifier in sklearn
 """
 from collections import defaultdict, Counter
 from itertools import combinations
-
 import logging
-logging.basicConfig(format='%(asctime)s %(levelname)-8s [%(process)d] %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
 
 import numpy as np
-
 from sklearn.base import BaseEstimator, ClassifierMixin
+
 from ._classifiers import LogisticClassifier, LinearSVMClassifier
 from .fast_gradient_method import fastgradientdescent
+
+logging.basicConfig(format='%(asctime)s %(levelname)-8s [%(process)d] %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
 
 _CLASSIFIERS = {
     'logistic': LogisticClassifier(),
@@ -182,7 +182,7 @@ class FGMBinaryClassifier(BaseEstimator, ClassifierMixin):
 
     def fit(self, X, y, verbose=False):
         """Fit the model using fast gradient method
-
+f
         Parameters
         ----------
         X: np.ndarray

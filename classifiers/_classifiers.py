@@ -119,7 +119,6 @@ class LinearSVMClassifier(BaseClassifier):
         self.h = h
 
     def computeobj(self, X, y, beta, lmbda):
-        n, d = X.shape
         h = self.h
 
         yhat = X @ beta
@@ -137,14 +136,13 @@ class LinearSVMClassifier(BaseClassifier):
 
         return lmbda*(np.linalg.norm(beta)**2) + np.mean(l_hh)
 
-    def computegrad(self, X, y, beta, lmbda, h=0.5):
+    def computegrad(self, X, y, beta, lmbda):
         n, d = X.shape
         h = self.h
 
         yhat = X @ beta
         yt = yhat * y # element wise product
 
-        mask_1 = yt > 1 + h
         mask_2 = np.abs(1 - yt) <= h
         mask_3 = yt < 1 - h
 
