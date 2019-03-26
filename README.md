@@ -1,13 +1,19 @@
-# ML From Scratch
+<h1 align="center">ML From Scratch - The Fast Gradient Method</h1>
 
-[![Build Status](https://travis-ci.org/havanagrawal/ml-from-scratch.svg?branch=master)](https://travis-ci.org/havanagrawal/ml-from-scratch) [![codecov](https://codecov.io/gh/havanagrawal/ml-from-scratch/branch/master/graph/badge.svg)](https://codecov.io/gh/havanagrawal/ml-from-scratch) ![Python Version](https://img.shields.io/badge/python-3.6-blue.svg)
+<div align="center">
 
+[![Build Status](https://travis-ci.org/havanagrawal/ml-from-scratch.svg?branch=master)](https://travis-ci.org/havanagrawal/ml-from-scratch) 
+[![codecov](https://codecov.io/gh/havanagrawal/ml-from-scratch/branch/master/graph/badge.svg)](https://codecov.io/gh/havanagrawal/ml-from-scratch) 
+![Python Version](https://img.shields.io/badge/python-3.6-blue.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+</div>
 
 ## Introduction
 
-This repository contains (what is hopefully productionized) snippets of code that are either just practice exercises, or logical extensions to the sklearn library.
+This repository contains a full-fledged, optimized implementation for the fast gradient method, intended as a logical extension to the sklearn library.
 
-A small section of this is also intended as a submission for DATA558/BIOST558 - Introduction to Machine Learning "Polished Code Release" assignment.
+This repo is also a submission for _DATA558/BIOST558 - Introduction to Machine Learning_ "Polished Code Release" assignment.
 
 ## Submission for BIOST558
 
@@ -25,8 +31,8 @@ source biost558/bin/activate
 Install the requirements and package using:
 
 ```
-pip install -r requirements.txt
-python setup.py install
+pip3 install -r requirements.txt
+python3 setup.py install
 ```
 
 Now the classes can be imported as usual:
@@ -41,7 +47,7 @@ The classes are sklearn-compatible, i.e. can be used in conjunction with [GridSe
 To run the Jupyter notebooks, you need to first install a local copy of Jupyter and ipykernel in the virtualenv:
 
 ```
-python -m ipykernel install --user
+pip3 install jupyter
 ```
 
 Then the Jupyter notebook can be started as usual:
